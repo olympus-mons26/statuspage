@@ -1,0 +1,32 @@
+{
+  "generatedAt": null,
+  "sites": [
+    {
+      "id": "wick",
+      "name": "Wick",
+      "url": "https://wick-md.surge.sh",
+      "status": "unknown",
+      "checkedAt": null,
+      "responseTimeMs": null,
+      "httpStatus": null
+    },
+    {
+      "id": "inkwell",
+      "name": "Inkwell",
+      "url": "https://inkwell-md.surge.sh",
+      "status": "unknown",
+      "checkedAt": null,
+      "responseTimeMs": null,
+      "httpStatus": null
+    },
+    {
+      "id": "whackamole",
+      "name": "Whack-a-mole",
+      "url": "https://whackamole-game.surge.sh",
+      "status": "unknown",
+      "checkedAt": null,
+      "responseTimeMs": null,
+      "httpStatus": null
+    }
+  ]
+}

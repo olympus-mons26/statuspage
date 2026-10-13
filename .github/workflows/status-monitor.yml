@@ -1,0 +1,97 @@
+name: Status monitor
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: What to do with the monitor list
+        type: choice
+        required: true
+        default: check
+        options:
+          - check
+          - add
+          - edit
+          - remove
+      existing_url:
+        description: Exact current URL to edit or remove
+        type: string
+        required: false
+      name:
+        description: Website display name (required for add and edit)
+        type: string
+        required: false
+      url:
+        description: Website URL (required for add and edit)
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: status-monitor
+  cancel-in-progress: false
+
+jobs:
+  check-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply website management request
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          SITE_OPERATION: ${{ inputs.operation }}
+          SITE_EXISTING_URL: ${{ inputs.existing_url }}
+          SITE_NAME: ${{ inputs.name }}
+          SITE_URL: ${{ inputs.url }}
+        run: python scripts/manage_sites.py
+
+      - name: Check websites and send outage alerts
+        id: monitor
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ALERT_EMAIL: ${{ vars.ALERT_EMAIL || 'bpanda.cp@gmail.com' }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+        run: python scripts/monitor.py
+
+      - name: Persist monitor state and configuration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add monitors.json monitor-state.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update website monitor state"
+            git push
+          fi
+
+      - name: Install Surge CLI
+        run: npm install --global surge
+
+      - name: Publish status page
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          SURGE_DOMAIN: ${{ vars.SURGE_DOMAIN || 'olympus-mons26-statuspage.surge.sh' }}
+        run: surge public "$SURGE_DOMAIN" --token "$SURGE_TOKEN"
+
+      - name: Report monitor notification errors
+        if: steps.monitor.outcome == 'failure'
+        run: |
+          echo "One or more notifications failed. Status data was still published; inspect the monitor step and repository secrets."
+          exit 1

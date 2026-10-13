@@ -1,0 +1,17 @@
+[
+  {
+    "id": "wick",
+    "name": "Wick",
+    "url": "https://wick-md.surge.sh"
+  },
+  {
+    "id": "inkwell",
+    "name": "Inkwell",
+    "url": "https://inkwell-md.surge.sh"
+  },
+  {
+    "id": "whackamole",
+    "name": "Whack-a-mole",
+    "url": "https://whackamole-game.surge.sh"
+  }
+]
