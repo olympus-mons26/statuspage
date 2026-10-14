@@ -1,4 +1,17 @@
 {
-  "sites": {},
+  "sites": {
+    "wick": {
+      "status": "up",
+      "incident": null
+    },
+    "inkwell": {
+      "status": "up",
+      "incident": null
+    },
+    "whackamole": {
+      "status": "up",
+      "incident": null
+    }
+  },
   "pendingClosures": []
 }
