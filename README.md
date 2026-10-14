@@ -1,10 +1,10 @@
 # Status Page for olympus-mons26
 
-A public uptime dashboard for the Wick, Inkwell, and Whack-a-mole websites. The page displays the latest check results, refreshes them every minute, and supports light and dark themes. GitHub Actions checks monitored sites every 15 minutes and deploys the static site to Surge.
+A public uptime dashboard for the project websites made by [Baljit Panda](https://github.com/olympus-mons26). The page displays the latest check results, refreshes them every minute, and supports light and dark themes. GitHub Actions checks monitored sites every 15 minutes and deploys the static site to Surge.
 
 **Public status page:** <https://olympus-mons26-statuspage.surge.sh>
 
-## Monitored websites
+## Currently monitored websites
 
 | Service | URL |
 | --- | --- |
