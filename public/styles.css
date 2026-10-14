@@ -335,6 +335,10 @@ h1 {
   margin: 0;
 }
 
+.footer .hosting-thanks {
+  margin-top: 7px;
+}
+
 .footer nav {
   flex: 0 0 auto;
   gap: 10px;
