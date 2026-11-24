@@ -13,5 +13,10 @@
     "id": "whackamole",
     "name": "Whack-a-mole",
     "url": "https://whackamole-game.surge.sh"
+  },
+  {
+    "id": "167508e9eb5e42669ce57488fda5a407",
+    "name": "Skyline Weather",
+    "url": "https://skyline-weather.surge.sh"
   }
 ]
