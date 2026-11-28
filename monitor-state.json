@@ -1,36 +1,20 @@
 {
   "sites": {
     "wick": {
-      "status": "down",
-      "incident": {
-        "startedAt": "2026-11-28T01:51:01Z",
-        "issueNumber": 1,
-        "emailSent": true
-      }
+      "status": "up",
+      "incident": null
     },
     "inkwell": {
-      "status": "down",
-      "incident": {
-        "startedAt": "2026-11-28T01:51:01Z",
-        "issueNumber": 2,
-        "emailSent": true
-      }
+      "status": "up",
+      "incident": null
     },
     "whackamole": {
-      "status": "down",
-      "incident": {
-        "startedAt": "2026-11-28T01:51:01Z",
-        "issueNumber": 3,
-        "emailSent": true
-      }
+      "status": "up",
+      "incident": null
     },
     "167508e9eb5e42669ce57488fda5a407": {
-      "status": "down",
-      "incident": {
-        "startedAt": "2026-11-28T01:51:01Z",
-        "issueNumber": 4,
-        "emailSent": true
-      }
+      "status": "up",
+      "incident": null
     }
   },
   "pendingClosures": []
